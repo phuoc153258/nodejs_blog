@@ -1,22 +1,21 @@
 // Chuyen het route vao file nay rut gon file index.js(src)
-const newsRouter = require('./news')
-const siteRouter = require('./site')
+const newsRouter = require('./news');
+const siteRouter = require('./site');
 
-function route(app){
-
+function route(app) {
     // routing
-    app.use('/news',newsRouter)
-    app.use('/',siteRouter)
+    app.use('/news', newsRouter);
+    app.use('/', siteRouter);
     // app.use('/search',siteRouter)
-        
+
     // app.get('/', (req, res) => {
     //     res.render('home');
     // });
-      
+
     // app.get('/news', (req, res) => {
     //     res.render('news');
     // });
-      
+
     // app.get('/search', (req, res) => {
     //     res.render('search');
     // });
