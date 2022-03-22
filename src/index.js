@@ -5,12 +5,12 @@ const path = require('path'); // __dirname , path
 const port = 3000;
 
 const route = require('./routes');
-const db = require('./config/db')
+const db = require('./config/db');
 
 const app = express();
 
 //  connect to DB
-db.connect()
+db.connect();
 
 // Middleware
 app.use(
@@ -28,11 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // set view engine : Handlebar
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, '/resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // Route init
 route(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });

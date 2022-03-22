@@ -1,10 +1,12 @@
 // Chuyen het route vao file nay rut gon file index.js(src)
 const newsRouter = require('./news');
 const siteRouter = require('./site');
+const coursesRouter = require('./courses');
 
 function route(app) {
     // routing
     app.use('/news', newsRouter);
+    app.use('/courses', coursesRouter);
     app.use('/', siteRouter);
     // app.use('/search',siteRouter)
 
