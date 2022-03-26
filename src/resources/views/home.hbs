@@ -1,6 +1,6 @@
-<div class="mt-5">
+<div class="mt-70px">
   <div class="row">
-    <div class="col-2">
+    <div class="col-2 mt-2">
         <h4>Front-End</h4>
         <p>HTML, CSS</p>
         <p>Javascript</p>
@@ -12,18 +12,17 @@
             {{#each courses}}
             <div class="col-4">
                 <div class="card m-3 text-center">
-                        <img class="card-img-top w-50 ml-auto mr-auto" src="{{this.image}}" alt="{{this.name}}" />
+                        <img class="card-img-top  ml-auto mr-auto" src="{{this.image}}" alt="{{this.name}}" />
                         <div class="card-body">
-                            <h5 class="card-title">{{this.name}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/courses/{{this.slug}}" class="btn btn-primary">Buy</a>
+                            <h5 class="card-title" style="height: 40px !important;">{{this.name}}</h5>
+                            <p class="card-text" style="height: 120px !important;">{{this.description}}</p>
+                            <a href="/courses/{{this.slug}}" class="btn btn-primary w-50">Buy</a>
                         </div>
                     </a>
                 </div>
             </div>
             {{/each}}
         </div>
- 
     </div>
   </div>
 

@@ -1,0 +1,76 @@
+<div class="mt-70px">
+    <h3 class="pt-2">Khoá học của tôi</h3>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên khoá học</th>
+                <th>Ảnh</th>
+                <th>Thời gian tạo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th>{{sum @index 1}}</th>
+                <td class="w-25">{{this.name}}</td>
+                <td><img src="{{this.image}}" alt="" class="w-25"></td>
+                <td class="w-25">{{this.createdAt}}</td>
+                <td class="d-flex">
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}">Xoá</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-course-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xoá khoá học ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc sẽ xoá khoá học không ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+        <button type="button" class="btn btn-primary" id="btn-delete-course">Xoá</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="form-delete-course" method="POST" hidden></form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        let courseId;
+        let btnDeleteCourse = document.getElementById('btn-delete-course')
+
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            courseId = button.data('id')
+        })
+
+        btnDeleteCourse.onclick = function(){
+            document.getElementById('form-delete-course').action = '/courses/' + courseId + '?_method=DELETE'
+            document.getElementById("form-delete-course").submit();
+        }
+    })
+
+</script>
+<script>
+    var name = document.getElementById("myText").value;
+    document.addEventListener('click',function(){
+        
+    })
+</script>

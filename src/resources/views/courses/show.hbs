@@ -1,0 +1,27 @@
+<div class="container mt-70px" style="padding-left: 0px !important; padding-right: 0px !important;">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Đăng ký khoá học</h5>
+                    <a href="" class="btn btn-primary mt-2 mb-4 pr-auto pl-auto">Học ngay</a>
+                    <p class="card-text text-left"><i class="fa-solid fa-film pr-3"></i>Tổng số 25 videos</p>
+                    <p class="card-text text-left"><i class="fa-solid fa-gauge pr-3"></i>Trình độ trung bình</p>
+                    <p class="card-text text-left"><i class="fa-solid fa-clock pr-3"></i>Cần 6.05 giờ để học</p>
+                    <p class="card-text text-left"><i class="fa-solid fa-battery-full pr-3"></i>Truy cập mọi lúc mọi nơi</p>
+                </div>
+            </div>
+            <div class="card mt-4 mb-4">
+                <div class="card-body text-center">
+                    <img class="card-img-top rounded-circle w-75 mb-3" src="http://localhost:3000/img/logo-f8.jpg" alt="Card image cap">
+                    <h5 class="card-title">Sơn Đặng</h5>
+                    <p class="card-text">Stop thinking start doing!!!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <h2>{{course.name}}</h2>
+            <p>{{course.description}}</p>
+            <iframe width="818" height="460" src="https://www.youtube.com/embed/{{course.videoId}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>        </div>
+    </div>
+</div>
