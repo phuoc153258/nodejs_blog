@@ -14,12 +14,12 @@
             {{#each courses}}
             <tr>
                 <th>{{sum @index 1}}</th>
-                <td class="w-25">{{this.name}}</td>
+                <td class="w-25 name-course-js">{{this.name}}</td>
                 <td><img src="{{this.image}}" alt="" class="w-25"></td>
                 <td class="w-25">{{this.createdAt}}</td>
                 <td class="d-flex">
                     <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}">Xoá</a>
+                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}" onclick="ShowTitleModal('{{this.name}}')">Xoá</a>
                 </td>
             </tr>
             {{/each}}
@@ -32,7 +32,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Xoá khoá học ?</h5>
+        <h5 class="modal-title" id="modal-title-course"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,7 +52,9 @@
 
 
 <script>
+
     document.addEventListener('DOMContentLoaded', function(){
+
         let courseId;
         let btnDeleteCourse = document.getElementById('btn-delete-course')
 
@@ -67,10 +69,7 @@
         }
     })
 
-</script>
-<script>
-    var name = document.getElementById("myText").value;
-    document.addEventListener('click',function(){
-        
-    })
+    function ShowTitleModal(name){
+      document.getElementById("modal-title-course").innerHTML  = name;
+    }
 </script>
