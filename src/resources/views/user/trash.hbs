@@ -1,13 +1,13 @@
 <div class="mt-70px">
-    <h3 class="pt-2">Khoá học của tôi</h3>
-    <a href="/user/trash/courses">Thùng rác ({{deletedCount}})</a>
+    <h3 class="pt-2">Khoá học đã xoá</h3>
+    <a href="/user/stored/courses">Danh sách khoá học</a>
     <table class="table mt-4">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Tên khoá học</th>
                 <th>Ảnh</th>
-                <th>Thời gian tạo</th>
+                <th>Thời gian xoá</th>
                 <th></th>
             </tr>
         </thead>
@@ -17,15 +17,15 @@
                 <th>{{sum @index 1}}</th>
                 <td class="w-25 name-course-js">{{this.name}}</td>
                 <td><img src="{{this.image}}" alt="" class="w-25"></td>
-                <td class="w-25">{{this.createdAt}}</td>
+                <td class="w-25">{{this.deletedAt}}</td>
                 <td class="d-flex">
-                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}" onclick="ShowTitleModal('{{this.name}}')">Xoá</a>
+                    <a href="" class="btn btn-link" onclick="RestoreCourse('{{this._id}}')">Khôi phục</a>
+                    <a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}" onclick="ShowTitleModal('{{this.name}}')">Xoá vĩnh viễn</a>
                 </td>
             </tr>
             {{else}}
             <tr>
-              <td colspan="5" class="text-center">Bạn chưa đăng khoá học nào.<a href="/courses/create">Đăng khoá học ngay!</a></td>
+                  <td colspan="5" class="text-center">Thùng rác trống.<a href="/user/stored/courses">Danh sách khoá học!</a></td>
             </tr>
             {{/each}}
         </tbody>
@@ -43,7 +43,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Bạn có chắc sẽ xoá khoá học không ?
+        Bạn có chắc sẽ xoá khoá học vĩnh viễn không ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
@@ -53,7 +53,8 @@
   </div>
 </div>
 
-<form id="form-delete-course" method="POST" hidden></form>
+<form id="delete-course-form" method="POST" hidden></form>
+<form id="restore-course-form" method="POST" hidden></form>
 
 
 <script>
@@ -69,10 +70,16 @@
         })
 
         btnDeleteCourse.onclick = function(){
-            document.getElementById('form-delete-course').action = '/courses/' + courseId + '?_method=DELETE'
-            document.getElementById("form-delete-course").submit();
+            document.getElementById('delete-course-form').action = '/courses/' + courseId + '/force?_method=DELETE'
+            document.getElementById("delete-course-form").submit();
         }
     })
+
+    function RestoreCourse(id){
+      event.preventDefault()
+      document.getElementById('restore-course-form').action = '/courses/' + id + '/restore?_method=PATCH'
+      document.getElementById("restore-course-form").submit();
+    }
 
     function ShowTitleModal(name){
       document.getElementById("modal-title-course").innerHTML  = name;
