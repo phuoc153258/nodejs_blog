@@ -3,19 +3,16 @@ const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 //Dinh nghia cac funtion
 class UserController {
-
     // [GET] /user/stored/courses
     index(req, res, next) {
-
-        Promise.all([ Course.find({}), Course.countDocumentsDeleted() ])
-            .then(([courses,deletedCount]) => {
+        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+            .then(([courses, deletedCount]) => {
                 res.render('./user/stored', {
                     deletedCount,
-                    courses: mutipleMongooseToObject(courses)
+                    courses: mutipleMongooseToObject(courses),
                 });
             })
-            .catch(next)
-
+            .catch(next);
     }
 
     //[GET] /user/trash/courses

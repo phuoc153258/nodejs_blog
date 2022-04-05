@@ -28,7 +28,8 @@ class CourseController {
     store(req, res, next) {
         const course = new Course(req.body);
         course.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
-        course.save()
+        course
+            .save()
             .then(() => {
                 res.redirect('/');
             })
@@ -61,19 +62,52 @@ class CourseController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
-    
+
     // [DELETE] /:id
     delete(req, res, next) {
-        Course.delete({ _id: req.params.id})
-            .then( () => res.redirect('back'))
-            .catch(next)
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
     }
-    
+
     // [DELETE] /:id/force
     forceDelete(req, res, next) {
-        Course.deleteOne({ _id: req.params.id})
-            .then( () => res.redirect('back'))
-            .catch(next)
+        Course.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+    // [POST] /handle-form-actions
+    handleFormActionsToStore(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Action is invalid' });
+                break;
+        }
+    }
+
+    handleFormActionsToTrash(req, res, next) {
+        switch (req.body.action) {
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+
+            case 'force-delete':
+                Course.deleteMany({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+
+            default:
+                res.json({ message: 'Action is invalid' });
+                break;
+        }
     }
 }
 
