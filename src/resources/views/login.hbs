@@ -1,11 +1,51 @@
-<form style="margin-top: 100px !important;" method="POST" action="/auth/login">
-  <div class="form-group">
+<div>
+  <div class="form-group" style="margin-top: 100px !important;">
     <label for="exampleInputEmail1">User name</label>
-    <input type="text" class="form-control" placeholder="Enter email" name="username">
+    <input type="text" class="form-control" placeholder="Enter email" id="username">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" placeholder="Password" name="password">
+    <input type="password" class="form-control" placeholder="Password" id="password">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  <button type="submit" class="btn btn-primary" onclick="login()">Submit</button>
+</div>
+<script>
+  function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+  function login(){
+    $.ajax({
+      url: 'http://localhost:3000/auth/login',
+      type: 'POST',
+      data: {
+        username: $('#username').val(),
+        password: $('#password').val()
+      }
+    })
+      .then(data => {
+        setCookie('token',data.token, 1)
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+</script>

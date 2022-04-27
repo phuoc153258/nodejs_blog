@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/phuoc153258/nodejs_blog#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
     "jsonwebtoken": "^8.5.1",

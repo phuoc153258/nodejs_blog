@@ -3,6 +3,7 @@ const morgan = require('morgan'); // morgan ()
 const { engine } = require('express-handlebars'); // express engine
 const path = require('path'); // __dirname , path
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser')
 
 const port = 3000;
 
@@ -12,6 +13,7 @@ const sortMiddleware = require('./app/middlewares/SortMiddleware');
 
 const app = express();
 
+app.use(cookieParser())
 app.use(sortMiddleware)
 
 app.use(methodOverride('_method'));

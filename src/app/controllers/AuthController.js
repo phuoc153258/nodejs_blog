@@ -12,12 +12,30 @@ class AuthController {
             password: req.body.password
         })
             .then((user) => {
-                jwt.sign(mongooseToObject(user), "secret", { expiresIn: "30s"}, function(err, token) {
-                    console.log(token);
-                    res.json(token)
-                });
+                if(user){
+                    jwt.sign(mongooseToObject(user), "secret", { expiresIn: "120s"}, function(err, token) {
+                        res.json({
+                            message: "thanh cong",
+                            token: token
+                        })
+                    });
+                }
+                else {
+                    res.json("That bai")
+                }
             })
-            .catch(next)
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    private(req, res, next){
+        let token = req.cookies.token
+        console.log(token)
+        jwt.verify(token, 'secret', function(err, decoded) {
+            if(err) res.redirect('/auth')
+            if(decoded) res.json(decoded)
+            else res.json('that bai')
+        });
     }
 }
 
